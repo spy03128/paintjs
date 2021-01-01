@@ -1,12 +1,13 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
 const colors = document.getElementsByClassName("controls__color");
+const range = document.getElementById("jsRange");
 
 canvas.width = 700;
 canvas.height = 700;
 
 ctx.strokeStyle = "#2c2c2c"; //default = black
-ctx.linewidth = 2.5; //선의굵기
+ctx.lineWidth = 2.5; //선의굵기
 
 let painting = false;
 
@@ -35,6 +36,11 @@ function handleColorClick(event) {
   ctx.strokeStyle = color;
 }
 
+function handleRangeChange(event) {
+  const strokeSize = event.target.value;
+  ctx.lineWidth = strokeSize;
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
@@ -45,3 +51,7 @@ if (canvas) {
 Array.from(colors).forEach((color) =>
   color.addEventListener("click", handleColorClick)
 );
+
+if (range) {
+  range.addEventListener("input", handleRangeChange);
+}
